@@ -23,20 +23,16 @@ public class Player {
 	private String password;
 	
 	@Column
-	private int wallet;
-	
-	@Column
 	private int chips;
 
 	public Player() {
 		super();
 	}
 
-	public Player(String username, String password, int wallet, int chips) {
+	public Player(String username, String password, int chips) {
 		super();
 		this.username = username;
 		this.password = password;
-		this.wallet = wallet;
 		this.chips = chips;
 	}
 
@@ -45,7 +41,6 @@ public class Player {
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		this.wallet = wallet;
 		this.chips = chips;
 	}
 
@@ -73,14 +68,6 @@ public class Player {
 		this.password = password;
 	}
 
-	public int getWallet() {
-		return wallet;
-	}
-
-	public void setWallet(int wallet) {
-		this.wallet = wallet;
-	}
-
 	public int getChips() {
 		return chips;
 	}
@@ -91,7 +78,7 @@ public class Player {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(chips, id, password, username, wallet);
+		return Objects.hash(chips, id, password, username);
 	}
 
 	@Override
@@ -104,15 +91,14 @@ public class Player {
 			return false;
 		Player other = (Player) obj;
 		return chips == other.chips && id == other.id && Objects.equals(password, other.password)
-				&& Objects.equals(username, other.username) && wallet == other.wallet;
+				&& Objects.equals(username, other.username);
 	}
 
 	@Override
 	public String toString() {
-		return "Player [id=" + id + ", username=" + username + ", password=" + password + ", wallet=" + wallet
-				+ ", chips=" + chips + "]";
+		return "Player [id=" + id + ", username=" + username + ", password=" + password + ", chips=" + chips + "]";
 	}
-	
+
 	
 	
 }

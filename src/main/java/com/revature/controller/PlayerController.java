@@ -33,7 +33,7 @@ public class PlayerController {
 	
 	
 	// AUTH SET UP HERE
-    @PostMapping("/users")
+    @PostMapping("/accounts")
     void addUser(@RequestBody Player p) {
         userService.insert(p);
     }
