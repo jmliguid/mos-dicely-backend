@@ -11,10 +11,10 @@ public class JsonViewProfiles {
 	 * You need to create JSON view profiles for Team and Room as shown
 	 * in below example:
 	 */
-	public static class User {
+	public static class Player {
 	}
 
-	public static class Address {
+	public static class Card {
 	}
 
 }
