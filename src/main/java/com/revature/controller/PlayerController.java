@@ -9,13 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.model.Player;
 import com.revature.service.UserService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/users")
+@CrossOrigin(origins = "*")
 public class PlayerController {
 
     // standard constructors
@@ -25,15 +27,13 @@ public class PlayerController {
 	
 	
 	// AUTH SET UP HERE
-	@SuppressWarnings("unchecked")
-	@GetMapping("/users")
     public List<Player> getUsers() {
         return (List<Player>) userService.findAll();
     }
 	
 	
 	// AUTH SET UP HERE
-    @PostMapping("/accounts")
+    @PostMapping("/add")
     void addUser(@RequestBody Player p) {
         userService.insert(p);
     }
