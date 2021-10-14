@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name="players")
-public class Player {
+public class User {
 
 	@Id
 	@Column(name="player_id")
@@ -25,18 +25,18 @@ public class Player {
 	@Column
 	private int chips;
 
-	public Player() {
+	public User() {
 		super();
 	}
 
-	public Player(String username, String password, int chips) {
+	public User(String username, String password, int chips) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.chips = chips;
 	}
 
-	public Player(int id, String username, String password, int wallet, int chips) {
+	public User(int id, String username, String password, int wallet, int chips) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -89,7 +89,7 @@ public class Player {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Player other = (Player) obj;
+		User other = (User) obj;
 		return chips == other.chips && id == other.id && Objects.equals(password, other.password)
 				&& Objects.equals(username, other.username);
 	}

@@ -7,41 +7,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.exceptions.UserNotFoundException;
-import com.revature.model.Player;
+import com.revature.model.User;
 import com.revature.repositories.UserDao;
 
 @Service
 public class UserService {
 	
 	@Autowired
-	UserDao playerDao;
+	UserDao userDao;
 	
 	// findById
-	public Player findById(int id) {
-		return playerDao.findById(id)
+	public User findById(int id) {
+		return userDao.findById(id)
 				.orElseThrow(() -> new UserNotFoundException("No User found with id " + id));
 	}
 	
 	// findByUsername
-	public Player findByUsername(String username) {
+	public User findByUsername(String username) {
 		
-		return playerDao.findByUsername(username)
+		return userDao.findByUsername(username)
 				.orElseThrow(() -> new UserNotFoundException("No User found with username " + username));
 	}
 	
 	//findAll
 	
-	public Set<Player> findAll() {
+	public Set<User> findAll() {
 		
-		return playerDao.findAll()
+		return userDao.findAll()
 							.stream()
 							.collect(Collectors.toSet());
 	}
 	
 	// Insert
-	public Player insert(Player p) {
+	public User insert(User p) {
 		
-		return playerDao.save(p);
+		return userDao.save(p);
 	}
 
 }

@@ -7,7 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.revature.model.Player;
+import com.revature.model.User;
 import com.revature.repositories.UserDao;
 
 @SpringBootApplication
@@ -21,7 +21,7 @@ public class MosDicelyBackendApplication {
 	CommandLineRunner init(UserDao userRepository) {
 		return args -> {
 			Stream.of("John", "Julie", "Jennifer", "Helen", "Rachel").forEach(username -> {
-					Player player = new Player(username, "password", 5);
+					User player = new User(username, "password", 5);
 					userRepository.save(player);
 			});
 			userRepository.findAll().forEach(System.out::println);

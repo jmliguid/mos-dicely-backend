@@ -1,5 +1,6 @@
 package com.revature.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.model.Player;
+import com.revature.model.User;
 import com.revature.service.UserService;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/accounts")
 @CrossOrigin(origins = "*")
-public class PlayerController {
+public class UserController {
 
     // standard constructors
     
@@ -27,21 +28,23 @@ public class PlayerController {
 	
 	
 	// AUTH SET UP HERE
-    public List<Player> getUsers() {
-        return (List<Player>) userService.findAll();
+    @SuppressWarnings("unchecked")
+    @GetMapping("/findAll")
+	public List<User> getUsers() {
+       return new ArrayList<>(userService.findAll());
     }
 	
 	
 	// AUTH SET UP HERE
     @PostMapping("/add")
-    void addUser(@RequestBody Player p) {
+    void addUser(@RequestBody User p) {
         userService.insert(p);
     }
     
     
     // AUTH SET UP HERE
     @GetMapping("/{id}") // if I send a get request to http://localhost:8090/api/users/5, it will capture 5 and search the User table for it
-	public ResponseEntity<Player> getUserById(@PathVariable("id") int id) {
+	public ResponseEntity<User> getUserById(@PathVariable("id") int id) {
 		
 		// call the service method, pass the captured id through, and returnit as a reposne entity with 200 OK status
 		return ResponseEntity.ok(userService.findById(id));
