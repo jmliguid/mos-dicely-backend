@@ -55,14 +55,17 @@ public class UserService implements UserDetailsService {
 		return userDao.save(p);
 	}
 	
+	// Find account balance by account ID
 	public int getBalance(int acctID) {
 		return userDao.findBalanceId(acctID);
 	}
-
+	
+	// Insert chips by account ID
 	public void depositAmount(int acctID, int amount) {
 		userDao.depositChipsById(acctID, amount);
 	}
 
+	// Take chips by account ID
 	public void withdrawAmount(int acctID, int amount) {
 		userDao.withdrawChipsById(acctID, amount);
 	}

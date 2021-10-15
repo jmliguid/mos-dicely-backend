@@ -15,8 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name="players")
+@Entity(name="players")
 public class User {
 
 	@Id

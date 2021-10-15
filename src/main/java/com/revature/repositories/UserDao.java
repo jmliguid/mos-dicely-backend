@@ -16,17 +16,17 @@ public interface UserDao extends JpaRepository<User, Integer> {
 	
 	public Optional<User> findByUsername(String username);
 	
-	@Query("select balance from Accounts where acctID = ?1")
+	@Query("select chips from players where player_id= ?1")
 	public int findBalanceId(int id);
 
 	@Transactional
 	@Modifying(clearAutomatically = true)
-	@Query("update Accounts set balance = balance+?2 where acctID=?1")
+	@Query("update players set chips = chips+?2 where player_id=?1")
 	public void depositChipsById(int id, int deposit);
 
 	@Transactional
 	@Modifying(clearAutomatically = true)
-	@Query("update Accounts set balance = balance-?2 where acctID=?1")
+	@Query("update players set chips = chips-?2 where player_id=?1")
 	public void withdrawChipsById(int id, int withdraw);
 
 }
