@@ -17,9 +17,6 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="players")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class User {
 
 	@Id
@@ -37,6 +34,18 @@ public class User {
 	 
 	@Column
 	private int chips;
+	
+	public User() {super();}
+
+	public User(int id, @NotBlank String username, @NotEmpty String password, int chips) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.chips = chips;
+	}
+
+
 
 
 	public User(@NotBlank String username, String password, int chips) {

@@ -54,6 +54,18 @@ public class UserService implements UserDetailsService {
 		
 		return userDao.save(p);
 	}
+	
+	public int getBalance(int acctID) {
+		return userDao.findBalanceId(acctID);
+	}
+
+	public void depositAmount(int acctID, int amount) {
+		userDao.depositChipsById(acctID, amount);
+	}
+
+	public void withdrawAmount(int acctID, int amount) {
+		userDao.withdrawChipsById(acctID, amount);
+	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
