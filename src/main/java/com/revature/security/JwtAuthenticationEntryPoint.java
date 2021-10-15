@@ -1,4 +1,4 @@
-package com.revature.config;
+package com.revature.security;
 
 import java.io.IOException;
 import java.io.Serializable;

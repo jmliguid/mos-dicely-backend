@@ -7,8 +7,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
-@Entity(name="players")
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name="players")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
 	@Id
@@ -16,33 +27,25 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@Column
+	@Column(unique=true)
+	@NotBlank
 	private String username;
 	
 	@Column
+	@NotEmpty
 	private String password;
-	
+	 
 	@Column
 	private int chips;
 
-	public User() {
-		super();
-	}
 
-	public User(String username, String password, int chips) {
+	public User(@NotBlank String username, String password, int chips) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.chips = chips;
 	}
 
-	public User(int id, String username, String password, int wallet, int chips) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.chips = chips;
-	}
 
 	public int getId() {
 		return id;

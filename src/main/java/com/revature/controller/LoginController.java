@@ -16,7 +16,7 @@ import com.revature.model.User;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping({ "/users" })
+@RequestMapping({ "/usersddd" })
 public class LoginController {
 	
 	private List<User> users = createList();

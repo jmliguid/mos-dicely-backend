@@ -1,53 +1,72 @@
 package com.revature.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.model.LoginForm;
 import com.revature.model.User;
 import com.revature.service.UserService;
 
-@RestController
-@RequestMapping("/accounts")
-@CrossOrigin(origins = "*")
+
+
+
+@RestController // RestController automatically puts ResponseBody on every public method (that is mapped) within this class
+@RequestMapping("/users") // we can access the methods of this controller at http://localhost:5000/app/users
+@CrossOrigin(origins = "*") // use origins = "*" to expose the controller to all ports
 public class UserController {
-
-    // standard constructors
-    
+	
 	@Autowired
-    UserService userService;
+	private UserService userService;
+	
+	@Autowired 
+	PasswordEncoder passwordEncoder;
+	
+	// find all
+	@GetMapping
+	public ResponseEntity<Set<User>> findAll() {
+		return ResponseEntity.ok(userService.findAll());
+	}
 	
 	
-	// AUTH SET UP HERE
-    @SuppressWarnings("unchecked")
-    @GetMapping("/findAll")
-	public List<User> getUsers() {
-       return new ArrayList<>(userService.findAll());
-    }
+//	 find by username /{username} use @pathvariable as your parameter
+	@GetMapping("/")
+	public ResponseEntity<User> findByUsername(@RequestParam(value="username") String username) {
+		return ResponseEntity.ok(userService.findByUsername(username));
+	}
 	
-	
-	// AUTH SET UP HERE
-    @PostMapping("/add")
-    void addUser(@RequestBody User p) {
-        userService.insert(p);
+    @GetMapping("/{id}")
+    public User getUser(@PathVariable int id) {
+        return userService.findById(id);
     }
     
-    
-    // AUTH SET UP HERE
-    @GetMapping("/{id}") // if I send a get request to http://localhost:8090/api/users/5, it will capture 5 and search the User table for it
-	public ResponseEntity<User> getUserById(@PathVariable("id") int id) {
+	
+	@PostMapping("/login") 
+	public ResponseEntity<User> login(@RequestBody LoginForm lf) {
 		
-		// call the service method, pass the captured id through, and returnit as a reposne entity with 200 OK status
-		return ResponseEntity.ok(userService.findById(id));
-    }	
-
+		ResponseEntity<User> entity;
+		try {
+			entity = findByUsername(lf.getUsername());
+			User user = entity.getBody();
+			if (!passwordEncoder.matches(lf.getPassword(), user.getPassword())) {
+				throw new Exception();
+			}
+			return entity;
+		} catch (Exception e) {
+			System.out.println("The username or password provided is incorrect");
+			return null;
+		}
+	}
 }
