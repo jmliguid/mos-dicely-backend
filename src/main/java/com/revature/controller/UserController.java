@@ -38,15 +38,15 @@ public class UserController {
 	PasswordEncoder passwordEncoder;
 	
 	// find all
-	@GetMapping
+	@GetMapping("/findAll")
 	public ResponseEntity<Set<User>> findAll() {
 		return ResponseEntity.ok(userService.findAll());
 	}
 	
 	
 //	 find by username /{username} use @pathvariable as your parameter
-	@GetMapping("/")
-	public ResponseEntity<User> findByUsername(@RequestParam(value="username") String username) {
+	@GetMapping("/username/{username}")
+	public ResponseEntity<User> findByUsername(@RequestParam() String username) {
 		return ResponseEntity.ok(userService.findByUsername(username));
 	}
 	
@@ -74,13 +74,13 @@ public class UserController {
 	}
 	
 	// checkBalance
-		@GetMapping("/account/{acctID}/balance")
+		@PutMapping("/account/{acctID}/balance")
 		public int getBalance(@PathVariable int acctID) {
 			return userService.getBalance(acctID);
 		}
 
 		// depositAmount
-		@PutMapping("/account/{acctID}/deposit/{amount}")
+		@PostMapping("/account/{acctID}/deposit/{amount}")
 		public void depositAmount(@PathVariable int acctID, @PathVariable int amount) {
 			int initBal = getBalance(acctID);
 			userService.depositAmount(acctID, amount);
@@ -88,7 +88,7 @@ public class UserController {
 		}
 
 		// withdrawAmount
-		@PutMapping("/account/{acctID}/withdraw/{amount}")
+		@PostMapping("/account/{acctID}/withdraw/{amount}")
 		public void withdrawAmount(@PathVariable int acctID, @PathVariable int amount) {
 			int initBal = getBalance(acctID);
 			userService.withdrawAmount(acctID, amount);

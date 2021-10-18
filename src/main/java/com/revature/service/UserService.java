@@ -33,8 +33,7 @@ public class UserService implements UserDetailsService {
 	// findByUsername
 	public User findByUsername(String username) {
 		
-		return userDao.findByUsername(username)
-				.orElseThrow(() -> new UserNotFoundException("No User found with username " + username));
+		return userDao.findByUsername(username);			
 	}
 	
 	//findAll

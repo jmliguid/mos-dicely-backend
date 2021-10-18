@@ -14,7 +14,8 @@ import com.revature.model.User;
 @Transactional
 public interface UserDao extends JpaRepository<User, Integer> {
 	
-	public Optional<User> findByUsername(String username);
+	
+	public User findByUsername(String username);
 	
 	@Query("select chips from players where player_id= ?1")
 	public int findBalanceId(int id);
