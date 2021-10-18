@@ -82,16 +82,16 @@ public class UserController {
 		// depositAmount
 		@PostMapping("/account/{acctID}/deposit/{amount}")
 		public void depositAmount(@PathVariable int acctID, @PathVariable int amount) {
-			int initBal = getBalance(acctID);
+			//int initBal = getBalance(acctID);
 			userService.depositAmount(acctID, amount);
-			log.info("Deposit a success. Deposited " + amount + " chips to account " + acctID + "'s balance of " + initBal + " chips to equal " + (initBal + amount));
+			//log.info("Deposit a success. Deposited " + amount + " chips to account " + acctID + "'s balance of " + initBal + " chips to equal " + (initBal + amount));
 		}
 
 		// withdrawAmount
 		@PostMapping("/account/{acctID}/withdraw/{amount}")
 		public void withdrawAmount(@PathVariable int acctID, @PathVariable int amount) {
-			int initBal = getBalance(acctID);
+			//int initBal = getBalance(acctID);
 			userService.withdrawAmount(acctID, amount);
-			log.info("Withdrawal a success. Took " + amount + " chips from account " + acctID + "'s balance of " + initBal + " chips to equal " + (initBal - amount));
+			//log.info("Withdrawal a success. Took " + amount + " chips from account " + acctID + "'s balance of " + initBal + " chips to equal " + (initBal - amount));
 		}
 }
