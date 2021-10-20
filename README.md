@@ -2,13 +2,18 @@
 Project 2 Backend
 
 ## Project Description:
-Mos Dicely Cantina is a web app that lets users play 3 different card games. Blackjack, matching, and war. Users can bet their chips and have their data persisted between sessions. 
+Mos Dicely Cantina is a web app that lets users play 3 different card games: blackjack, matching, and war. Users can bet their chips and have their data persisted between sessions. 
 
 ## Technologies Used:
 * Java
 * Angular
 * NodeJS
 * AWS EC2
+* AWS CodePipeline
+* Amazon RDS
+* Spring Boot
+* Spring Data
+* Spring Web
 * Postman
 
 ## Features
